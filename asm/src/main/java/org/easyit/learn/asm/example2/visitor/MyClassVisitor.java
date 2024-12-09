@@ -35,9 +35,11 @@ public class MyClassVisitor extends ClassVisitor {
     };
 
     private final Map<String, Integer> methodCount = new HashMap<>();
+    private int api;
 
     public MyClassVisitor(final int api) {
         super(api);
+        this.api = api;
         for (final String methodName : METHOD_NAMES) {
             methodCount.put(methodName, 0);
         }
@@ -45,7 +47,7 @@ public class MyClassVisitor extends ClassVisitor {
     }
 
     private void record(final String methodName, final Object[] params) {
-        System.out.println("Invoke: " + methodName);
+        System.out.println("ClassVisitor: " + methodName);
         methodCount.put(methodName, methodCount.get(methodName) + 1);
     }
 
@@ -120,6 +122,7 @@ public class MyClassVisitor extends ClassVisitor {
             access,
             version
         });
+        // todo visitModule
         return null;
     }
 
@@ -171,7 +174,7 @@ public class MyClassVisitor extends ClassVisitor {
             descriptor,
             visible
         });
-        return null;
+        return new MyAnnotationVisitor(api, "\t");
     }
 
     /**
@@ -195,7 +198,7 @@ public class MyClassVisitor extends ClassVisitor {
             descriptor,
             visible
         });
-        return null;
+        return new MyAnnotationVisitor(api, "\t");
     }
 
     /**
@@ -270,7 +273,7 @@ public class MyClassVisitor extends ClassVisitor {
             descriptor,
             signature
         });
-        return null;
+        return new MyRecordComponentVisitor(api, "\t");
     }
 
     /**
@@ -303,7 +306,7 @@ public class MyClassVisitor extends ClassVisitor {
             signature,
             value
         });
-        return null;
+        return new MyFieldVisitor(api, "\t");
     }
 
     /**
@@ -334,7 +337,7 @@ public class MyClassVisitor extends ClassVisitor {
             signature,
             exceptions
         });
-        return null;
+        return new MyMethodVisitor(api, "\t");
     }
 
     /**
