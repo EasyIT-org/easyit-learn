@@ -77,14 +77,14 @@ public class EasyClassFile {
             + toKeyAndValue("Minor Version", this.minor_version)
             + toKeyAndValue("Constant Pool Count", this.constant_pool_count)
             + toKeyAndValue("Access Flag", ClassInfoParser.accessFlag(this.access_flags))
-            + toKeyAndValue("This Class", this.this_class) // todo need to deal with const pool
-            + toKeyAndValue("Super Class", this.super_class) // todo need to deal with const pool
+            + toKeyAndValue("This Class", this.this_class)
+            + toKeyAndValue("Super Class", this.super_class)
             + toKeyAndValue("Interfaces Count", this.interfaces_count)
             + toKeyAndValue("Interfaces", this.interfaces)
             + toKeyAndValue("Fields Count", this.fields_count)
-            + toKeyAndValueArray("Fields", this.fields) // todo deal with array
+            + toKeyAndValueArray("Fields", this.fields)
             + toKeyAndValue("Methods Count", this.methods_count)
-            + toKeyAndValueArray("Methods", this.methods) // todo deal with array
+            + toKeyAndValueArray("Methods", this.methods)
             + toKeyAndValue("Attributes Count", this.attributes_count)
             + toKeyAndValue("Attributes", this.attributes);
         return result;
