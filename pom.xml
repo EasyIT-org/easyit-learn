@@ -15,6 +15,7 @@
         <module>echo/echo-analyze</module>
         <module>agent</module>
         <module>asm</module>
+        <module>rxjava</module>
     </modules>
 
     <properties>

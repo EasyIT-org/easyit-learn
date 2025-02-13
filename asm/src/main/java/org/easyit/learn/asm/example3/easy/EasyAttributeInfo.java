@@ -1,5 +1,6 @@
 package org.easyit.learn.asm.example3.easy;
 
+import io.netty.buffer.ByteBuf;
 import javassist.bytecode.AttributeInfo;
 import javassist.bytecode.CodeAttribute;
 import lombok.ToString;
@@ -8,7 +9,7 @@ import lombok.ToString;
 public class EasyAttributeInfo {
 
     //u2 attribute_name_index;
-    protected short attribute_name_index;
+    protected int attribute_name_index;
     protected String attribute_name;
     //u4 attribute_length;
     protected int attribute_length;
@@ -24,6 +25,15 @@ public class EasyAttributeInfo {
         } else {
             target.info = attributeInfo.get();
         }
+        return target;
+    }
+
+    public static EasyAttributeInfo fromRaw(final ByteBuf buf) {
+        EasyAttributeInfo target = new EasyAttributeInfo();
+        target.attribute_name_index = buf.readUnsignedShort();
+        target.attribute_length = buf.readInt();
+        target.info = new byte[target.attribute_length];
+        buf.readBytes(target.info);
         return target;
     }
 }

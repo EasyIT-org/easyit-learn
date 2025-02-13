@@ -12,6 +12,7 @@ import org.easyit.learn.asm.example3.ClassInfoParser;
 import org.easyit.learn.asm.example3.ConstantPoolEntry;
 import org.easyit.learn.asm.example3.Symbol;
 import org.easyit.learn.asm.example3.ValueConstantEntry;
+import org.easyit.learn.asm.example3.easy.EasyClassFile;
 import org.easyit.learn.asm.utils.ByteBufUtils;
 
 public class ReadSimpleDemo {
@@ -88,6 +89,9 @@ public class ReadSimpleDemo {
      * @param buf
      */
     private static void parse(final ByteBuf buf) {
+        EasyClassFile.fromRaw(buf);
+        EasyClassFile easyClassFile = new EasyClassFile();
+
         // should be 0xCAFEBABE
         readHex("magic", buf.readUnsignedInt());
         // For a class file whose major_version is 56 or above, the minor_version must be 0 or 65535.
